@@ -162,8 +162,8 @@ def parse_config(path):
 
     print("Reading config file:", path)
 
-    config = ConfigParser()
-    config.read(path)
+    with open(path, 'r') as f:
+        config = json.load(f)
 
     return config
 
