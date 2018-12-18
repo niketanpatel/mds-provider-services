@@ -167,6 +167,11 @@ def setup_cli():
         help="The vehicle_id to obtain results for.\
         Only applies to --trips."
     )
+    parser.add_argument(
+        "--rate-limit",
+        type=int,
+        help="Number of seconds to pause between paging requests to a given endpoint."
+    )
 
     return parser, parser.parse_args()
 
@@ -276,7 +281,8 @@ def acquire_data(record_type, cli, client, start_time, end_time, paging):
                 start_time=start_time,
                 end_time=end_time,
                 bbox=cli.bbox,
-                paging=paging
+                paging=paging,
+                rate_limit=cli.rate_limit
             )
         elif record_type == mds.TRIPS:
             datasource = client.get_trips(
@@ -285,7 +291,8 @@ def acquire_data(record_type, cli, client, start_time, end_time, paging):
                 start_time=start_time,
                 end_time=end_time,
                 bbox=cli.bbox,
-                paging=paging
+                paging=paging,
+                rate_limit=cli.rate_limit
             )
 
     return datasource
