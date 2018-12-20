@@ -131,10 +131,16 @@ def availability(provider_name, vehicle_type, args):
 
     devices = DeviceCounter(args.start, args.end, local=args.local, debug=args.debug)
 
-    q = query.Availability(args.start, args.end,
+    q = query.Availability(
+        args.start,
+        args.end,
         vehicle_types=vehicle_type,
         table="csm_availability",
-        local=args.local, debug=True)
+        local=args.local,
+        debug=True,
+        start_types="available",
+        end_types=["reserved", "removed"]
+    )
 
     results = {}
 
@@ -155,10 +161,16 @@ def availability(provider_name, vehicle_type, args):
         end = start + oneday
         log(args, f"Counting {start.strftime('%Y-%m-%d')} to {end.strftime('%Y-%m-%d')}")
 
-        _q = query.Availability(start, end,
+        _q = query.Availability(
+            start,
+            end,
             vehicle_types=vehicle_type,
             table="csm_availability",
-            local=args.local, debug=args.debug)
+            local=args.local,
+            debug=args.debug,
+            start_types="available",
+            end_types=["reserved", "removed"]
+        )
 
         _data = _q.get(provider_name)
 

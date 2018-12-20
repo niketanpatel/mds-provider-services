@@ -187,7 +187,7 @@ class Availability(TimeQuery):
 
         :start_types: event_type or list of event_type to restrict the `start_event_type` (e.g. `available`).
 
-        :end_types: event_type or list of event_type to restrict the `end_event_type` (e.g. `available`).
+        :end_types: event_type or list of event_type to restrict the `end_event_type` (e.g. `removed`, `reserved`).
 
         See `TimeQuery` for additional optional keyword arguments.
         """
@@ -206,7 +206,7 @@ class Availability(TimeQuery):
 
         :start_types: event_type or list of event_type to restrict the start_event_type (e.g. `available`).
 
-        :end_types: event_type or list of event_type to restrict the end_event_type (e.g. `available`).
+        :end_types: event_type or list of event_type to restrict the end_event_type (e.g. `removed`, `reserved`).
 
         See `TimeQuery` for additional optional keyword arguments.
 
