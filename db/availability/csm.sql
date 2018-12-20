@@ -27,8 +27,6 @@ SELECT
     end_time
 FROM
     public.availability
-WHERE
-    st_contains(csm_city_boundary(), csm_parse_feature_geom(event_location))
 ORDER BY
     (provider_name, vehicle_type, start_time, end_time)
 
