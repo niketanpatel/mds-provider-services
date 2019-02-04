@@ -22,6 +22,14 @@ Then run the data ingester:
 docker-compose run --rm ingest [OPTIONS]
 ```
 
+## Docker Container Configuration
+
+The ingest service pulls data from `provider` API endpoints in the time interval that’s specified in the command line arguments. The ingest will store all of the data in memory until the entire time interval is traversed. So, in the case that a large time interval is specified in the command line arguments, it’s possible that default or existing Docker configuration for container resources may not be enough to persist all the data in memory at once.
+
+It’s recommended to batch your ingests into smaller time windows. **We’ve found batching ingests with 1 month time windows for status_changes and one week windows for trips to be performant.** However, if it’s needed to ingest a large time window at once, you should increase the memory of your containers by [editing the advanced preferences of your Docker application.](https://stackoverflow.com/a/44533437).
+
+A good benchmark is **4 GB memory per 3 months of data for ingesting status changes, and 4 GB memory per 1 day of data for ingesting trips.**
+
 ## [OPTIONS]
 
 Note: you must provide a range of time to query using some combination of `start_time`, `end_time`, and `duration`.
